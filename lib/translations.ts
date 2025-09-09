@@ -21,6 +21,27 @@ export const translations = {
         voiceQueries: "Voice queries in Malayalam, Hindi & English",
         weatherRecommendations: "Weather-based farming recommendations",
       },
+      farmersSection: {
+        heading: "Farmers Who Trust Us",
+        description: "See how farmers across India are using AI to improve their crops, reduce costs, and grow smarter every season.",
+        testimonials: [
+          {
+            name: "Ramesh Kumar",
+            location: "Punjab, India",
+            text: "With AI weather alerts, I saved my wheat crop from unexpected rains. The app guides me like a digital agriculture officer.",
+          },
+          {
+            name: "Anita Devi",
+            location: "Bihar, India",
+            text: "Earlier I had to ask neighbors about crop diseases. Now I just take a photo and get instant AI suggestions. Very helpful!",
+          },
+          {
+            name: "Suresh Patel",
+            location: "Gujarat, India",
+            text: "The government scheme recommendations helped me get subsidies I didn’t know about. This app is a real boon for farmers.",
+          },
+        ],
+      },
       stats: {
         consultations: "Today's Consultations",
         cropHealth: "Average Crop Health",
@@ -91,6 +112,27 @@ export const translations = {
         voiceQueries: "മലയാളം, ഹിന്ദി, ഇംഗ്ലീഷിൽ വോയ്സ് ചോദ്യങ്ങൾ",
         weatherRecommendations: "കാലാവസ്ഥാധിഷ്ഠിത കാർഷിക ശുപാർശകൾ",
       },
+      farmersSection: {
+        heading: "നമ്മിൽ വിശ്വാസമുള്ള കര്‍ഷകർ",
+        description: "ഭാരതത്തിലെ കര്‍ഷകർ എങ്ങനെ AI ഉപയോഗിച്ച് അവരുടെ വിളകൾ മെച്ചപ്പെടുത്തുന്നു, ചെലവ് കുറയ്ക്കുന്നു, ഓരോ സീസണിലും സ്മാർട്ടായി വളരുന്നു എന്ന് കാണൂ.",
+        testimonials: [
+          {
+            name: "രമേഷ് കുമാർ",
+            location: "പഞ്ചാബ്, ഇന്ത്യ",
+            text: "AI കാലാവസ്ഥാ അലർട്ടുകൾ കാരണം എന്റെ ഗോതമ്പ് വിളകൾ അപ്രതീക്ഷിത മഴയിൽ നിന്ന് രക്ഷപ്പെട്ടു. ആപ്പ് എന്നെ ഡിജിറ്റൽ കാർഷിക ഓഫീസർ പോലെ മാർഗനിർദ്ദേശം ചെയ്യുന്നു.",
+          },
+          {
+            name: "അനിത ദേവി",
+            location: "ബീഹാർ, ഇന്ത്യ",
+            text: "മുമ്പ് ഞാൻ വിള രോഗങ്ങളെക്കുറിച്ച് അയൽവാസികളോട് ചോദിക്കേണ്ടി വന്നിരുന്നു. ഇപ്പോൾ ഞാൻ ഫോട്ടോ എടുക്കുന്നു, AI ഉടൻ നിർദ്ദേശങ്ങൾ നൽകുന്നു. വളരെ സഹായകരമാണ്!",
+          },
+          {
+            name: "സുരേഷ് പട്ടേൽ",
+            location: "ഗുജറാത്ത്, ഇന്ത്യ",
+            text: "സർക്കാർ പദ്ധതികളുടെ ശിപാർശകൾ എന്റെ അറിവിൽ ഇല്ലാത്ത सब്സിഡികൾ ലഭിക്കാൻ സഹായിച്ചു. ഈ ആപ്പ് കര്‍ഷകർക്കായി ഒരു യാഥാർത്ഥ്യ സഹായമാണ്.",
+          },
+        ],
+      },
       stats: {
         consultations: "ഇന്നത്തെ കൺസൾട്ടേഷനുകൾ",
         cropHealth: "ശരാശരി വിള ആരോഗ്യം",
@@ -160,6 +202,27 @@ export const translations = {
         photoDetection: "फोटो-आधारित रोग का पता लगाना",
         voiceQueries: "मलयालम, हिंदी और अंग्रेजी में आवाज प्रश्न",
         weatherRecommendations: "मौसम-आधारित कृषि सिफारिशें",
+      },
+      farmersSection: {
+        heading: "हम पर भरोसा करने वाले किसान",
+        description: "देखें कि भारत भर के किसान अपने फसलों को बेहतर बनाने, लागत कम करने और हर मौसम में स्मार्ट तरीके से बढ़ने के लिए AI का कैसे उपयोग कर रहे हैं।",
+        testimonials: [
+          {
+            name: "रमेश कुमार",
+            location: "पंजाब, भारत",
+            text: "AI मौसम अलर्ट्स की मदद से मैंने अपने गेहूं की फसल को अप्रत्याशित बारिश से बचाया। यह ऐप मुझे डिजिटल कृषि अधिकारी की तरह मार्गदर्शन करता है।",
+          },
+          {
+            name: "अनीता देवी",
+            location: "बिहार, भारत",
+            text: "पहले मुझे फसल रोगों के बारे में पूछने के लिए पड़ोसियों से पूछना पड़ता था। अब मैं बस फोटो लेती हूं और तुरंत AI सुझाव प्राप्त करती हूं। बहुत मददगार!",
+          },
+          {
+            name: "सुरेश पटेल",
+            location: "गुजरात, भारत",
+            text: "सरकारी योजना की सिफारिशों ने मुझे सब्सिडी पाने में मदद की, जिसके बारे में मुझे नहीं पता था। यह ऐप किसानों के लिए वास्तव में वरदान है।",
+          },
+        ],
       },
       stats: {
         consultations: "आज की परामर्श",

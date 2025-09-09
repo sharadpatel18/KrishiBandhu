@@ -23,44 +23,40 @@ export default function Header({ language, setLanguage, activeTab, setActiveTab 
           <div className="flex space-x-1">
             <button
               onClick={() => setActiveTab("home")}
-              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-                activeTab === "home"
-                  ? "bg-primary text-primary-foreground shadow-md"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
-              }`}
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${activeTab === "home"
+                ? "bg-primary text-primary-foreground shadow-md"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                }`}
             >
               <Leaf className="h-4 w-4 inline mr-2" />
               {t.tabs.home}
             </button>
             <button
               onClick={() => setActiveTab("chat")}
-              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-                activeTab === "chat"
-                  ? "bg-primary text-primary-foreground shadow-md"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
-              }`}
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${activeTab === "chat"
+                ? "bg-primary text-primary-foreground shadow-md"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                }`}
             >
               <MessageCircle className="h-4 w-4 inline mr-2" />
               {t.tabs.chat}
             </button>
             <button
               onClick={() => setActiveTab("schemes")}
-              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-                activeTab === "schemes"
-                  ? "bg-primary text-primary-foreground shadow-md"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
-              }`}
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${activeTab === "schemes"
+                ? "bg-primary text-primary-foreground shadow-md"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                }`}
             >
               <Shield className="h-4 w-4 inline mr-2" />
               {t.tabs.schemes}
             </button>
             <button
               onClick={() => setActiveTab("prices")}
-              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-                activeTab === "prices"
-                  ? "bg-primary text-primary-foreground shadow-md"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
-              }`}
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${activeTab === "prices"
+                ? "bg-primary text-primary-foreground shadow-md"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                }`}
             >
               <TrendingUp className="h-4 w-4 inline mr-2" />
               {t.tabs.prices}
@@ -69,12 +65,16 @@ export default function Header({ language, setLanguage, activeTab, setActiveTab 
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className="gap-2 bg-transparent">
+              <button
+                className="flex items-center gap-2 px-3 py-1.5 border border-gray-300 rounded-md bg-white text-gray-900hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-primary transition-colors duration-200 text-sm font-medium
+  "
+              >
                 <Globe className="h-4 w-4" />
                 {language === "en" ? "English" : language === "ml" ? "മലയാളം" : "हिंदी"}
-              </Button>
+              </button>
+
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent>
               <DropdownMenuItem onClick={() => setLanguage("en")}>English</DropdownMenuItem>
               <DropdownMenuItem onClick={() => setLanguage("ml")}>മലയാളം</DropdownMenuItem>
               <DropdownMenuItem onClick={() => setLanguage("hi")}>हिंदी</DropdownMenuItem>

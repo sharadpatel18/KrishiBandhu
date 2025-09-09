@@ -14,6 +14,7 @@ interface ChatPageProps {
   isListening: boolean
   handleSendMessage: () => void
   handleVoiceInput: () => void
+  handleImageUpload?: () => void // 👈 optional camera action
 }
 
 export default function ChatPage({
@@ -24,138 +25,110 @@ export default function ChatPage({
   isListening,
   handleSendMessage,
   handleVoiceInput,
+  handleImageUpload,
 }: ChatPageProps) {
   const t = translations[language]
 
   return (
     <div className="flex flex-col h-screen bg-background relative overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-primary/5 rounded-full animate-float"></div>
-        <div className="absolute top-40 right-20 w-24 h-24 bg-accent/10 rounded-full animate-float-delayed"></div>
-        <div className="absolute bottom-32 left-1/4 w-20 h-20 bg-primary/8 rounded-full animate-pulse"></div>
-        <div className="absolute top-1/3 right-1/3 w-16 h-16 bg-accent/5 rounded-full animate-bounce-slow"></div>
-      </div>
-
-      <div className="bg-gradient-to-r from-primary via-primary to-primary/90 text-primary-foreground p-8 flex items-center gap-6 shadow-xl relative z-10">
-        <div className="bg-primary-foreground/20 p-4 rounded-2xl backdrop-blur-sm animate-pulse-gentle">
-          <Leaf className="h-10 w-10" />
+      {/* HEADER */}
+      <div className="bg-gradient-to-r from-primary/90 to-primary text-primary-foreground px-6 py-4 flex items-center gap-4 shadow-md relative z-10">
+        <div className="bg-primary-foreground/20 p-2 rounded-xl backdrop-blur-sm animate-pulse-gentle">
+          <Leaf className="h-7 w-7" />
         </div>
         <div className="flex-1">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <h2 className="font-bold text-2xl">{t.chat.title}</h2>
-            <Sparkles className="h-6 w-6 text-accent animate-twinkle" />
+            <Sparkles className="h-5 w-5 text-accent animate-twinkle" />
           </div>
-          <p className="text-primary-foreground/90 text-lg mt-1">{t.chat.subtitle}</p>
-          <div className="flex items-center gap-2 mt-2">
-            <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-            <span className="text-sm text-primary-foreground/80">Online & Ready</span>
-          </div>
+          <p className="text-primary-foreground/80 text-base mt-0.5">{t.chat.subtitle}</p>
         </div>
       </div>
 
+      {/* CHAT AREA */}
       <div className="flex-1 overflow-y-auto relative">
-        {/* Light background with subtle pattern */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50/80 via-white to-slate-50/60"></div>
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            backgroundImage: `radial-gradient(circle at 25px 25px, rgba(34, 197, 94, 0.1) 2px, transparent 0),
-                           radial-gradient(circle at 75px 75px, rgba(34, 197, 94, 0.05) 1px, transparent 0)`,
-            backgroundSize: "100px 100px",
-          }}
-        ></div>
-
-        <div className="relative z-10 max-w-5xl mx-auto px-6 py-10 space-y-8">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 py-6 space-y-6">
+          {/* Empty State */}
           {(!messages || messages.length === 0) && (
-            <div className="text-center py-16 animate-fade-in">
-              <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-primary/10 max-w-2xl mx-auto">
-                <div className="bg-primary/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce-gentle">
-                  <Leaf className="h-10 w-10 text-primary" />
+            <div className="text-center py-12 animate-fade-in">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-md border border-primary/10 max-w-xl mx-auto">
+                <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce-gentle">
+                  <Leaf className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="text-2xl font-bold text-foreground mb-4">Welcome to Digital Krishi Officer</h3>
+                <h3 className="text-2xl font-bold text-foreground mb-2">
+                  Welcome to Digital Krishi Officer
+                </h3>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  Ask me anything about farming, crops, weather, government schemes, or market prices. I'm here to help
-                  you 24/7!
+                  Ask me anything about farming, crops, weather, schemes, or market prices. I'm here to help you 24/7!
                 </p>
-                <div className="flex flex-wrap gap-3 justify-center mt-8">
-                  {["Weather forecast", "Crop diseases", "Market prices", "Government schemes"].map(
-                    (suggestion, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setInputText(suggestion)}
-                        className="px-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 animate-fade-in-up"
-                        style={{ animationDelay: `${index * 100}ms` }}
-                      >
-                        {suggestion}
-                      </button>
-                    ),
-                  )}
-                </div>
               </div>
             </div>
           )}
 
-          {(messages || []).map((message, index) => (
+          {/* Chat Messages */}
+          {(messages || []).map((message) => (
             <div
               key={message.id}
               className={`flex ${message.isUser ? "justify-end" : "justify-start"} animate-slide-in-up`}
-              style={{ animationDelay: `${index * 100}ms` }}
             >
               {!message.isUser && (
-                <div className="bg-primary p-4 rounded-2xl mr-6 h-14 w-14 flex items-center justify-center flex-shrink-0 shadow-lg animate-bounce-gentle">
-                  <Leaf className="h-7 w-7 text-primary-foreground" />
+                <div className="bg-primary p-3 rounded-xl mr-3 h-11 w-11 flex items-center justify-center flex-shrink-0 shadow-sm">
+                  <Leaf className="h-5 w-5 text-primary-foreground" />
                 </div>
               )}
               <div
-                className={`max-w-[75%] px-8 py-6 rounded-3xl shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl ${
+                className={`max-w-[72%] px-6 py-4 rounded-2xl shadow-md text-lg leading-relaxed ${
                   message.isUser
-                    ? "bg-primary text-primary-foreground animate-slide-in-right"
-                    : "bg-white/90 text-foreground border border-primary/10 animate-slide-in-left"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-white text-foreground border border-primary/10"
                 }`}
               >
-                <p className="text-base leading-relaxed font-medium">{message.text}</p>
-                <p className="text-sm opacity-70 mt-4 font-medium">{message.timestamp.toLocaleTimeString()}</p>
+                <p>{message.text}</p>
+                <p className="text-sm opacity-70 mt-1">{message.timestamp.toLocaleTimeString()}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="bg-white/95 backdrop-blur-md border-t border-primary/20 p-8 shadow-2xl relative z-10">
-        <div className="max-w-5xl mx-auto">
-          <div className="flex gap-6 items-center">
-            <div className="flex-1 relative">
-              <Input
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-                placeholder={t.chat.placeholder}
-                onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-                className="pr-6 py-8 text-lg rounded-2xl border-2 border-primary/20 focus:border-primary bg-white/80 backdrop-blur-sm shadow-lg transition-all duration-300 hover:shadow-xl focus:shadow-xl"
-              />
-            </div>
+      {/* INPUT AREA */}
+      <div className="bg-white/95 backdrop-blur-md border-t border-primary/20 px-5 py-5 shadow-lg relative z-10">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex gap-3 items-center">
+            <Input
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              placeholder={t.chat.placeholder}
+              onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
+              className="flex-1 pr-5 py-4 text-lg rounded-xl border border-primary/20 focus:border-primary bg-white/80 shadow-sm"
+            />
+            {/* Mic Button */}
             <Button
               onClick={handleVoiceInput}
               variant="outline"
-              size="lg"
-              className={`rounded-2xl p-6 transition-all duration-300 hover:scale-105 shadow-lg ${
+              size="icon"
+              className={`rounded-xl p-6 transition-all duration-300 hover:scale-105 shadow-sm ${
                 isListening
                   ? "bg-destructive text-destructive-foreground animate-pulse border-destructive"
-                  : "bg-white/80 backdrop-blur-sm border-primary/20 hover:bg-primary/10"
+                  : "bg-white/80 border-primary/20 hover:bg-primary/10"
               }`}
             >
-              <Mic className="h-6 w-6" />
+              <Mic className="h-8 w-8" />
             </Button>
+            {/* Camera Button */}
             <Button
+              onClick={handleImageUpload}
               variant="outline"
-              size="lg"
-              className="rounded-2xl p-6 bg-white/80 backdrop-blur-sm border-primary/20 hover:bg-primary/10 transition-all duration-300 hover:scale-105 shadow-lg"
+              size="icon"
+              className="rounded-xl p-6 bg-white/80 border-primary/20 hover:bg-primary/10 transition-all duration-300 hover:scale-105 shadow-sm"
             >
               <Camera className="h-6 w-6" />
             </Button>
+            {/* Send Button */}
             <Button
               onClick={handleSendMessage}
-              size="lg"
-              className="rounded-2xl px-8 py-6 bg-primary hover:bg-primary/90 transition-all duration-300 hover:scale-105 shadow-lg"
+              size="icon"
+              className="rounded-xl p-6 bg-primary hover:bg-primary/90 transition-all duration-300 hover:scale-105 shadow-sm"
             >
               <Send className="h-6 w-6" />
             </Button>
