@@ -95,7 +95,7 @@ export default function HomePage({ language, setActiveTab, weatherData, cropHeal
       </div>
 
       {/* 📊 STATS */}
-      <div className="py-20">
+      <div className="py-20 bg-muted/20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">{t.home.title}</h2>

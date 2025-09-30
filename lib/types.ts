@@ -1,8 +1,9 @@
 export interface Message {
-  id: number
+  id: string
   text: string
   isUser: boolean
   timestamp: Date
+  isLoading?: boolean
 }
 
 export interface Scheme {

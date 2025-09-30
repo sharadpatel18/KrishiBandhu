@@ -5,6 +5,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Globe, Leaf, MessageCircle, Shield, TrendingUp } from "lucide-react"
 import type { Language } from "@/lib/types"
 import { translations } from "@/lib/translations"
+import { redirect } from "next/navigation"
 
 interface HeaderProps {
   language: Language
@@ -32,7 +33,7 @@ export default function Header({ language, setLanguage, activeTab, setActiveTab 
               {t.tabs.home}
             </button>
             <button
-              onClick={() => setActiveTab("chat")}
+              onClick={()=>redirect("/chat")}
               className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${activeTab === "chat"
                 ? "bg-primary text-primary-foreground shadow-md"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted"
